@@ -1,0 +1,234 @@
+{
+    "common": {
+        "add": "Tambah",
+        "cancel": "Batal",
+        "save": "Simpan",
+        "delete": "Hapus",
+        "edit": "Ubah",
+        "loading": "Memuat...",
+        "error": "Terjadi kesalahan",
+        "select": "Pilih"
+    },
+    "nav": {
+        "brand": "Time Work",
+        "features": "Fitur",
+        "howItWorks": "Alur Kerja",
+        "faq": "FAQ",
+        "projects": "Daftar Proyek",
+        "myTasks": "Tugas Saya",
+        "protocols": "SOP & Protokol",
+        "superAdmin": "Super Admin",
+        "signIn": "Masuk",
+        "signOut": "Keluar",
+        "getStarted": "Mulai Sekarang",
+        "projectForm": "Formulir Proyek",
+        "insight": "Insight",
+        "fileManager": "File Manager",
+        "trash": "Tempat Sampah"
+    },
+    "protocol": {
+        "titlePlaceholder": "Ketik judul tugas baru...",
+        "daysPlaceholder": "Hari",
+        "noAssignee": "Tanpa Penanggung Jawab",
+        "add": "Tambah",
+        "noSteps": "Belum ada langkah. Tambahkan tugas pertama di atas.",
+        "loginTip": "*User wajib login sekali untuk muncul.",
+        "sidebar": {
+            "menuTitle": "Menu Protokol",
+            "workflow": "Alur Kerja ({steps})",
+            "form": "Formulir Input",
+            "tipsTitle": "Tips Pro",
+            "tip1": "Gunakan <b>kurung kurawal</b> seperti <code>{author}</code> pada Pola Judul untuk pengisian otomatis.",
+            "tip2": "Tambahkan opsi <b>\"Custom\"</b> di Dropdown agar user bisa mengetik nilai sendiri.",
+            "tip3": "Gunakan <b>Hidden</b> pada field yang ingin diisi otomatis tapi disembunyikan dari user."
+        }
+    },
+    "project": {
+        "title": "Proyek Aktif",
+        "subtitle": "Pantau progres operasional dan kelola tim Anda.",
+        "newProject": "Proyek Baru",
+        "createTitle": "Input Proyek Baru",
+        "nameLabel": "Nama Proyek",
+        "protocolLabel": "Jenis Protokol (SOP)",
+        "cancel": "Batal",
+        "create": "Buat Proyek",
+        "noProjects": "Belum ada Proyek",
+        "noProjectsDesc": "Mulai dengan input Proyek pertama Anda sesuai SOP.",
+        "updated": "Diperbarui",
+        "tasks": "Tugas",
+        "fastTrack": "Mode Cepat",
+        "fastTrackDesc": "Alur kerja yang disederhanakan untuk tugas cepat.",
+        "markDone": "Tandai Selesai",
+        "endOfWorkflow": "Akhir Alur Kerja",
+        "loadMore": "Muat Lebih Banyak",
+        "loadingMore": "Memuat...",
+        "deleteConfirm": "Apakah Anda yakin ingin menghapus proyek ini? Tindakan ini tidak dapat dibatalkan.",
+        "deleteSuccess": "Proyek berhasil dihapus",
+        "deleteError": "Gagal menghapus proyek",
+        "status": {
+            "ACTIVE": "Aktif",
+            "COMPLETED": "Selesai",
+            "LOCKED": "Terkunci",
+            "IN_PROGRESS": "Sedang Dikerjakan",
+            "DONE": "Selesai",
+            "OPEN": "Terbuka"
+        },
+        "detail": {
+            "project": "Proyek",
+            "progress": "Progres",
+            "tasksCompleted": "tugas selesai",
+            "back": "Kembali",
+            "settings": "Aksi",
+            "teamMembers": "Anggota Tim",
+            "noDescription": "Tidak ada deskripsi.",
+            "activityLog": "Log Aktivitas",
+            "take": "Ambil",
+            "reopen": "Buka Kembali",
+            "done": "Selesai",
+            "lockAssignments": "Kunci Penugasan",
+            "unlockAssignments": "Buka Kunci Penugasan",
+            "waitsFor": "Menunggu:",
+            "noDetails": "Tidak ada detail",
+            "clickToExpand": "Klik untuk melihat detail",
+            "clickToCollapse": "Klik untuk menutup",
+            "descriptionPlaceholder": "Deskripsi...",
+            "skipped": "Dilewati",
+            "refresh": "Refresh"
+        },
+        "searchPlaceholder": "Cari Proyek...",
+        "allProtocols": "Semua SOP",
+        "allStatus": "Semua Status"
+    },
+    "formBuilder": {
+        "title": "Pengaturan Formulir Proyek",
+        "subtitle": "Sesuaikan field data yang diperlukan saat membuat proyek baru.",
+        "addField": "Tambah Field",
+        "save": "Simpan Template",
+        "saving": "Menyimpan...",
+        "label": "Label",
+        "key": "Key (ID)",
+        "type": "Tipe",
+        "required": "Wajib Diisi",
+        "options": "Opsi (pisahkan koma)",
+        "remove": "Hapus Field",
+        "types": {
+            "text": "Teks Pendek",
+            "number": "Angka",
+            "select": "Pilihan (Dropdown)",
+            "date": "Tanggal",
+            "checkboxGroup": "Checkbox Group"
+        },
+        "placeholders": {
+            "label": "Contoh: Nama Lengkap",
+            "key": "Contoh: full_name",
+            "options": "Opsi A, Opsi B, Opsi C"
+        },
+        "validation": {
+            "empty": "Semua field harus memiliki Label dan Key (ID)",
+            "success": "Template formulir berhasil disimpan",
+            "error": "Gagal menyimpan template formulir"
+        }
+    },
+    "protocolLibrary": {
+        "title": "Pustaka Protokol",
+        "subtitle": "Standarisasi alur kerja Anda dengan template yang dapat digunakan kembali.",
+        "createTitle": "Buat Protokol Baru",
+        "nameLabel": "Nama",
+        "namePlaceholder": "Contoh: Standar Operasional Produksi",
+        "descLabel": "Deskripsi",
+        "descPlaceholder": "Deskripsi protokol...",
+        "createButton": "Buat Protokol",
+        "noProtocols": "Tidak ada protokol ditemukan. Buat satu untuk memulai.",
+        "steps": "Langkah",
+        "noDesc": "Tidak ada deskripsi.",
+        "updated": "Update:"
+    },
+    "myTasks": {
+        "title": "Tugas Aktif Saya",
+        "subtitle": "Halo {name}, Anda memiliki {count} tugas aktif.",
+        "allCaughtUp": "Semua beres!",
+        "noActiveTasks": "Tidak ada tugas aktif yang diberikan kepada Anda.",
+        "openProject": "Buka Proyek →"
+    },
+    "home": {
+        "badge": "v1.0 sudah tersedia",
+        "title": "Otomatisasi Operasional.",
+        "titleHighlight": "SOP Berjalan Sendiri.",
+        "subtitle": "Time Work mengubah SOP Anda menjadi protokol eksekusi otomatis. Setiap langkah selesai, tim berikutnya langsung mendapatkan notifikasi.",
+        "openProjects": "Buka Dashboard",
+        "viewProtocols": "Cek Template",
+        "features": {
+            "title": "Operasional Modern",
+            "subtitle": "Semua alat yang dibutuhkan tim untuk bekerja lebih cepat dan terstandar.",
+            "standardized": {
+                "title": "SOP Terintegrasi",
+                "desc": "Setiap tahap kerja sudah memiliki checklist yang harus dipenuhi sebelum lanjut."
+            },
+            "dependencies": {
+                "title": "Alur Terkunci",
+                "desc": "Mencegah langkah kerja dimulai sebelum prasyarat selesai dilakukan."
+            },
+            "parallel": {
+                "title": "Transparansi Real-time",
+                "desc": "Semua anggota tim tahu persis status pengerjaan tanpa perlu koordinasi manual."
+            },
+            "automated": {
+                "title": "Otomatisasi Status",
+                "desc": "Status proyek merambat otomatis sesuai penyelesaian tugas di lapangan."
+            },
+            "sync": {
+                "title": "Sinkronisasi Data",
+                "desc": "Informasi terbaru langsung terupdate di seluruh divisi tanpa duplikasi data."
+            },
+            "audit": {
+                "title": "Jejak Audit Lengkap",
+                "desc": "Riwayat setiap aksi tercatat permanen untuk akuntabilitas dan evaluasi."
+            }
+        },
+        "howItWorks": {
+            "title": "Cara Kerja",
+            "subtitle": "Sederhana, Terencana, Terukur.",
+            "steps": {
+                "define": {
+                    "title": "1. Input Proyek",
+                    "desc": "Pilih jenis pekerjaan dan masukkan detail awal sesuai standarisasi."
+                },
+                "execute": {
+                    "title": "2. Eksekusi Berbasis SOP",
+                    "desc": "Tim mengerjakan tugas sesuai urutan protokol yang sudah ditentukan."
+                },
+                "automate": {
+                    "title": "3. Pantau & Selesaikan",
+                    "desc": "Sistem memastikan setiap kualitas terpenuhi di setiap gerbang pengerjaan."
+                }
+            }
+        },
+        "faq": {
+            "title": "Pertanyaan Umum",
+            "items": {
+                "free": {
+                    "q": "Siapa yang bisa akses?",
+                    "a": "Sistem ini dapat diakses oleh organisasi yang membutuhkan standarisasi operasional."
+                },
+                "team": {
+                    "q": "Bagaimana jika ada kesalahan?",
+                    "a": "Anda bisa menolak pengerjaan tugas, dan sistem akan mengembalikannya ke tahap sebelumnya."
+                },
+                "limit": {
+                    "q": "Bisa kustomisasi SOP?",
+                    "a": "Ya. Admin dapat membuat protokol baru yang sesuai dengan kebutuhan unik bisnis Anda."
+                }
+            }
+        },
+        "footer": {
+            "brand": "Time Work",
+            "desc": "Standar Baru Operasi Tim.",
+            "copyright": "© 2024 Time Work. Enterprise Operations Platform.",
+            "links": {
+                "twitter": "Twitter",
+                "github": "Website"
+            },
+            "developedBy": "Developed by {name} from {company}"
+        }
+    }
+}

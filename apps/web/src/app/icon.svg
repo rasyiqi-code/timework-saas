@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" class="lucide lucide-check-square">
+  <rect width="24" height="24" rx="4" fill="#cd1717"/>
+  <path d="m9 11 3 3L22 4" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" transform="translate(-4, 2) scale(0.8)"/>
+  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0"/>
+  <!-- Simplified Icon for favicon clarity: Just a checkmark on a red rounded square -->
+  <path d="M7 12l3 3 7-7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

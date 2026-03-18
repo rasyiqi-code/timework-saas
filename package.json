@@ -1,0 +1,26 @@
+{
+  "name": "timework-monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "type-check": "turbo run check-types",
+    "clean": "turbo run clean"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^11.0.0",
+    "turbo": "^2.7.3"
+  },
+  "packageManager": "bun@1.2.4",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@types/react-dom": "^19"
+  }
+}

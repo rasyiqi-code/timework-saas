@@ -1,0 +1,299 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ProtocolItemType {
+  TASK
+  NOTE
+  GROUP
+}
+
+enum FileAccess {
+  PUBLIC
+  RESTRICTED
+}
+
+// Organization (Tenant)
+model Organization {
+  id        String   @id // Will match Stack Team ID
+  name      String
+  slug      String?  // Optional, for URLs/display
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  members     OrganizationMember[]
+  activeUsers User[]              // Users who currently have this Org selected
+  projects    Project[]
+  protocols Protocol[]
+  formTemplate OrganizationFormTemplate?
+}
+
+model OrganizationFormTemplate {
+  id             String       @id @default(cuid())
+  organizationId String       @unique
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  
+  // JSON structure: Array of Field Definitions
+  // [{ key: "sender", label: "Pengirim", type: "text", required: true }, ...]
+  fields         Json
+  
+  updatedAt      DateTime     @updatedAt
+}
+
+// User & Auth
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  role      String   @default("STAFF") // Enum: SUPER_ADMIN, ADMIN, MANAGER, STAFF
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  organizationId String? // Tracks "Currently Selected" Organization for session context
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+
+  memberships OrganizationMember[] // Persistent membership across Orgs
+
+  assignedItems ProjectItem[]
+  projectAssignments ProjectItem[] @relation("ProjectItemAssignees")
+  managedProjects Project[]
+  assignedProtocolItems ProtocolItem[]
+  protocolDefaultAssignments ProtocolItem[] @relation("ProtocolItemDefaultAssignees")
+  
+  // Access Control
+  allowedProtocols Protocol[] @relation("ProtocolAllowedCreators")
+  allowedProtocolFileViewers ProtocolItem[] @relation("ProtocolItemAllowedViewers")
+  allowedProjectFileViewers  ProjectItem[]  @relation("ProjectItemAllowedViewers")
+  completedItems             ProjectItem[]  @relation("ProjectItemCompleter")
+
+  uploadedFiles File[]
+}
+
+// Membership (Many-to-Many with Metadata)
+model OrganizationMember {
+  id             String       @id @default(cuid())
+  userId         String
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  role           String       @default("STAFF") // Role specific to this Org (ADMIN, STAFF)
+  joinedAt       DateTime     @default(now())
+
+  @@unique([userId, organizationId]) // User can join an Org only once
+  @@index([organizationId])
+  @@index([userId])
+}
+
+// Project (The Canvas)
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  status      String   @default("ACTIVE") // Enum: ACTIVE, COMPLETED, ARCHIVED
+  category    String   @default("SPT")    // Enum: SPT, SATUAN
+  startDate   DateTime?
+  targetDate  DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  createdById String
+  createdBy   User   @relation(fields: [createdById], references: [id])
+
+  protocolId  String?
+  protocol    Protocol? @relation(fields: [protocolId], references: [id])
+
+  items       ProjectItem[]
+  history     ProjectHistory[]
+  
+  // Flexible SaaS Data (Custom Fields per Organization)
+  metadata    Json? 
+
+  files       File[]
+
+  @@index([organizationId])
+  @@index([createdById])
+}
+
+// Protocol (Template)
+model Protocol {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  formFields  Json?    // Array of FormField definitions specific to this SOP
+  titleFormat String?  // e.g. "{author} - {bookTitle}"
+  isDefault   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  items       ProtocolItem[]
+  projects    Project[]
+
+  // Access Control: If empty, everyone can use. If populated, only these users can use.
+  allowedCreators User[] @relation("ProtocolAllowedCreators")
+
+  @@index([organizationId])
+}
+
+// Protocol Items (Template Tasks)
+model ProtocolItem {
+  id          String   @id @default(cuid())
+  title       String
+  type        ProtocolItemType @default(TASK)
+  description String?
+  role        String?    @default("STAFF") 
+  duration    Int      @default(1) // Default duration in days
+  order       Int      @default(0)
+  requireAttachment Boolean  @default(false)
+  fileAccess         FileAccess @default(PUBLIC)
+  color       String?
+  metadata    Json? // For storing row effects
+  
+  protocolId  String
+  protocol    Protocol @relation(fields: [protocolId], references: [id], onDelete: Cascade)
+
+  defaultAssigneeId String?
+  defaultAssignee   User?   @relation(fields: [defaultAssigneeId], references: [id])
+
+  // Multi-assignee support
+  defaultAssignees  User[]  @relation("ProtocolItemDefaultAssignees")
+  allowedFileViewers User[] @relation("ProtocolItemAllowedViewers")
+
+  // Subtasks (Recursive)
+  parentId    String?
+  parent      ProtocolItem?  @relation("SubTasks", fields: [parentId], references: [id], onDelete: Cascade)
+  children    ProtocolItem[] @relation("SubTasks")
+
+  // Dependencies within template (Adjacency List)
+  dependsOn   ProtocolDependency[] @relation("Dependent")
+  requiredBy  ProtocolDependency[] @relation("Prerequisite")
+}
+
+model ProtocolDependency {
+  id             String       @id @default(cuid())
+  itemId         String
+  item           ProtocolItem @relation("Dependent", fields: [itemId], references: [id], onDelete: Cascade)
+  
+  prerequisiteId String
+  prerequisite   ProtocolItem @relation("Prerequisite", fields: [prerequisiteId], references: [id], onDelete: Cascade)
+
+  @@unique([itemId, prerequisiteId])
+}
+
+// Project Items (Real Tasks)
+model ProjectItem {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  status      String   @default("LOCKED") // Enum: LOCKED, OPEN, IN_PROGRESS, DONE, PROBLEM, SKIPPED
+  
+  // Timeline Data
+  startDate   DateTime?
+  endDate     DateTime?
+  
+  projectId   String
+  project     Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  assignedToId String?
+  assignedTo   User?   @relation(fields: [assignedToId], references: [id])
+
+  // Track who completed the task
+  completedById String?
+  completedBy   User?   @relation("ProjectItemCompleter", fields: [completedById], references: [id])
+
+  // Multiple Assignees (New)
+  assignees    User[]  @relation("ProjectItemAssignees")
+  allowedFileViewers User[] @relation("ProjectItemAllowedViewers")
+
+  // Sync from Protocol
+  type        ProtocolItemType @default(TASK)
+  order       Int              @default(0)
+  requireAttachment Boolean  @default(false)
+  fileAccess         FileAccess       @default(PUBLIC)
+  color             String?
+  attachmentUrl String? // DEPRECATED: Use files relation instead
+  files             File[]
+  metadata          Json? // For storing row effects e.g. { completionEffect: { rowColor: "bg-red-50" } }
+  
+  parentId    String?
+  parent      ProjectItem?   @relation("SubProjectTasks", fields: [parentId], references: [id], onDelete: Cascade)
+  children    ProjectItem[]  @relation("SubProjectTasks")
+
+  // Dependency Graph
+  dependsOn   ItemDependency[] @relation("Dependent")
+  requiredBy  ItemDependency[] @relation("Prerequisite")
+
+  // For tracking which protocol item this came from (optional)
+  originProtocolItemId String?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([projectId])
+  @@index([assignedToId])
+}
+
+model ItemDependency {
+  id             String      @id @default(cuid())
+  itemId         String
+  item           ProjectItem @relation("Dependent", fields: [itemId], references: [id], onDelete: Cascade)
+  
+  prerequisiteId String
+  prerequisite   ProjectItem @relation("Prerequisite", fields: [prerequisiteId], references: [id], onDelete: Cascade)
+
+  @@unique([itemId, prerequisiteId])
+}
+
+// Audit Log / History
+model ProjectHistory {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  
+  action    String   // e.g., "ITEM_ADDED", "STATUS_CHANGE"
+  details   String?  // JSON string of details
+  
+  timestamp DateTime @default(now())
+}
+
+model File {
+  id        String   @id @default(cuid())
+  name      String
+  url       String
+  size      Int      @default(0)
+  type      String   @default("application/octet-stream")
+  
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  
+  taskId    String?
+  task      ProjectItem? @relation(fields: [taskId], references: [id])
+  
+  uploadedById String
+  uploadedBy   User @relation(fields: [uploadedById], references: [id])
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([projectId])
+  @@index([taskId])
+  @@index([uploadedById])
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": [
+    "**/.env"
+  ],
+  "globalEnv": [
+    "DATABASE_URL",
+    "SUPER_ADMIN_EMAIL",
+    "STACK_SECRET_SERVER_KEY",
+    "NEXT_PUBLIC_STACK_PROJECT_ID",
+    "NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY",
+    "NEXT_PUBLIC_APP_URL",
+    "R2_ACCOUNT_ID",
+    "R2_ACCESS_KEY_ID",
+    "R2_SECRET_ACCESS_KEY",
+    "R2_BUCKET_NAME",
+    "R2_PUBLIC_URL",
+    "NEXT_PUBLIC_ENABLE_SOCKET"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "dist/**"
+      ]
+    },
+    "@repo/database#build": {
+      "cache": false
+    },
+    "lint": {},
+    "check-types": {
+      "dependsOn": [
+        "^build"
+      ]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

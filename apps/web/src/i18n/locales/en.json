@@ -1,0 +1,234 @@
+{
+    "common": {
+        "add": "Add",
+        "cancel": "Cancel",
+        "save": "Save",
+        "delete": "Delete",
+        "edit": "Edit",
+        "loading": "Loading...",
+        "error": "Something went wrong",
+        "select": "Select"
+    },
+    "nav": {
+        "brand": "Time Work",
+        "features": "Features",
+        "howItWorks": "How it Works",
+        "faq": "FAQ",
+        "projects": "Projects",
+        "myTasks": "My Tasks",
+        "protocols": "Protocols",
+        "superAdmin": "Super Admin",
+        "signIn": "Sign In",
+        "signOut": "Sign Out",
+        "getStarted": "Get Started",
+        "projectForm": "Project Form",
+        "insight": "Insight",
+        "fileManager": "File Manager",
+        "trash": "Trash"
+    },
+    "protocol": {
+        "titlePlaceholder": "Type new task title...",
+        "daysPlaceholder": "Days",
+        "noAssignee": "No Assignee",
+        "add": "Add",
+        "noSteps": "No steps defined. Add the first task above.",
+        "loginTip": "*User must login once to appear.",
+        "sidebar": {
+            "menuTitle": "Protocol Menu",
+            "workflow": "Workflow ({steps})",
+            "form": "Intake Form",
+            "tipsTitle": "Pro Tips",
+            "tip1": "Use <b>curly braces</b> like <code>{author}</code> in the Title Pattern to auto-fill project names.",
+            "tip2": "Add <b>\"Custom\"</b> as an option in Dropdowns to let users type their own value.",
+            "tip3": "Toggle <b>Hidden</b> on fields you want to pre-fill logically but hide from users (advanced)."
+        }
+    },
+    "protocolLibrary": {
+        "title": "Protocol Library",
+        "subtitle": "Standardize your workflows with reusable templates.",
+        "createTitle": "Create New Protocol",
+        "nameLabel": "Name",
+        "namePlaceholder": "e.g., Standard Production Flow",
+        "descLabel": "Description",
+        "descPlaceholder": "Protocol description...",
+        "createButton": "Create Protocol",
+        "noProtocols": "No protocols found. Create one to get started.",
+        "steps": "Steps",
+        "noDesc": "No description provided.",
+        "updated": "Upd:"
+    },
+    "project": {
+        "title": "Active Projects",
+        "subtitle": "Track progress and manage your team's workflow.",
+        "newProject": "New Project",
+        "createTitle": "Create New Project",
+        "nameLabel": "Project Name",
+        "protocolLabel": "Select Protocol (Template)",
+        "cancel": "Cancel",
+        "create": "Create Project",
+        "noProjects": "No projects yet",
+        "noProjectsDesc": "Get started by creating your first project from a protocol template.",
+        "updated": "Updated",
+        "tasks": "Tasks",
+        "fastTrack": "Fast Track Mode",
+        "fastTrackDesc": "Simplified workflow for quick tasks.",
+        "markDone": "Mark Done",
+        "endOfWorkflow": "End of Workflow",
+        "loadMore": "Load More Projects",
+        "loadingMore": "Loading...",
+        "deleteConfirm": "Are you sure you want to delete this project? This cannot be undone.",
+        "deleteSuccess": "Project deleted",
+        "deleteError": "Failed to delete project",
+        "status": {
+            "ACTIVE": "Active",
+            "COMPLETED": "Completed",
+            "LOCKED": "Locked",
+            "IN_PROGRESS": "In Progress",
+            "DONE": "Done",
+            "OPEN": "Open"
+        },
+        "detail": {
+            "project": "Project",
+            "progress": "Progress",
+            "tasksCompleted": "tasks completed",
+            "back": "Back",
+            "settings": "Action",
+            "teamMembers": "Team Members",
+            "noDescription": "No description provided.",
+            "activityLog": "Activity Log",
+            "take": "Take",
+            "reopen": "Reopen",
+            "done": "Done",
+            "lockAssignments": "Lock Assignments",
+            "unlockAssignments": "Unlock Assignments",
+            "waitsFor": "Waits for:",
+            "noDetails": "No details",
+            "clickToExpand": "Click to expand details",
+            "clickToCollapse": "Click to collapse",
+            "descriptionPlaceholder": "Description...",
+            "skipped": "Skipped",
+            "refresh": "Refresh"
+        },
+        "searchPlaceholder": "Search projects...",
+        "allProtocols": "All Protocols",
+        "allStatus": "All Status"
+    },
+    "formBuilder": {
+        "title": "Project Form Settings",
+        "subtitle": "Customize the data fields required when creating a new project.",
+        "addField": "Add Field",
+        "save": "Save Template",
+        "saving": "Saving...",
+        "label": "Label",
+        "key": "Key (ID)",
+        "type": "Type",
+        "required": "Required Field",
+        "options": "Options (comma separated)",
+        "remove": "Remove Field",
+        "types": {
+            "text": "Text Input",
+            "number": "Number Input",
+            "select": "Dropdown (Select)",
+            "date": "Date Picker",
+            "checkboxGroup": "Checkbox Group"
+        },
+        "placeholders": {
+            "label": "e.g. Full Name",
+            "key": "e.g. full_name",
+            "options": "Option A, Option B, Option C"
+        },
+        "validation": {
+            "empty": "All fields must have a Label and a Key (ID)",
+            "success": "Form template saved successfully",
+            "error": "Failed to save form template"
+        }
+    },
+    "myTasks": {
+        "title": "My Active Tasks",
+        "subtitle": "Hello {name}, you have {count} active items on your deck.",
+        "allCaughtUp": "All caught up!",
+        "noActiveTasks": "No active tasks assigned to you.",
+        "openProject": "Open Project →"
+    },
+    "home": {
+        "badge": "v1.0 is now live",
+        "title": "Automated Operations.",
+        "titleHighlight": "Zero Coordination.",
+        "subtitle": "Time Work turns your SOPs into executable protocols. When one step finishes, the next unlocks automatically.",
+        "openProjects": "Go to Dashboard",
+        "viewProtocols": "See SOPs",
+        "features": {
+            "title": "Modern Operations",
+            "subtitle": "Everything you need to ship projects faster, all in one place.",
+            "standardized": {
+                "title": "Impossible to Forget",
+                "desc": "Complex workflows become simple checklists. Ensure quality without micromanagement."
+            },
+            "dependencies": {
+                "title": "Auto-Unlock",
+                "desc": "Tasks remain locked until prerequisites are met. Prevents skipping steps."
+            },
+            "parallel": {
+                "title": "Visual Progress",
+                "desc": "See exactly where every project is stuck. Eliminate bottlenecks instantly."
+            },
+            "automated": {
+                "title": "Automated Execution",
+                "desc": "Protocols run themselves. Just set the rules and watch it go."
+            },
+            "sync": {
+                "title": "Real-time Sync",
+                "desc": "Changes propagate instantly across your team."
+            },
+            "audit": {
+                "title": "Audit Trails",
+                "desc": "Track every action and record evidence with a click."
+            }
+        },
+        "howItWorks": {
+            "title": "How it Works",
+            "subtitle": "Simple, yet powerful.",
+            "steps": {
+                "define": {
+                    "title": "1. Input Project",
+                    "desc": "Start a project from a protocol template."
+                },
+                "execute": {
+                    "title": "2. Execute",
+                    "desc": "Your team works on tasks according to the protocol order."
+                },
+                "automate": {
+                    "title": "3. Deliver",
+                    "desc": "System ensures quality gatekeepers are passed at every stage."
+                }
+            }
+        },
+        "faq": {
+            "title": "Frequently Asked Questions",
+            "items": {
+                "free": {
+                    "q": "Is it free?",
+                    "a": "Time Work offers various plans depending on your organization size."
+                },
+                "team": {
+                    "q": "Can I invite my team?",
+                    "a": "Absolutely. You can invite unlimited team members to your organization."
+                },
+                "limit": {
+                    "q": "Are there project limits?",
+                    "a": "Project limits depend on your organization plan."
+                }
+            }
+        },
+        "footer": {
+            "brand": "Time Work",
+            "desc": "The new standard for team operations.",
+            "copyright": "© 2024 Time Work. All rights reserved.",
+            "links": {
+                "twitter": "Twitter",
+                "github": "GitHub"
+            },
+            "developedBy": "Developed by {name} from {company}"
+        }
+    }
+}

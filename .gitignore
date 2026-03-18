@@ -1,0 +1,10 @@
+node_modules
+.env
+.env.local
+.DS_Store
+.turbo
+dist
+build
+.next
+.vercel
+vercel-deploy.env

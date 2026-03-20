@@ -153,39 +153,62 @@
         "openProject": "Buka Proyek →"
     },
     "home": {
-        "badge": "v1.0 sudah tersedia",
-        "title": "Otomatisasi Operasional.",
-        "titleHighlight": "SOP Berjalan Sendiri.",
-        "subtitle": "Time Work mengubah SOP Anda menjadi protokol eksekusi otomatis. Setiap langkah selesai, tim berikutnya langsung mendapatkan notifikasi.",
+        "badge": "v1.1 dengan AI kini aktif",
+        "title": "Orkestrasi Operasional.",
+        "titleHighlight": "Skala dengan Presisi.",
+        "subtitle": "Sederhanakan bisnis Anda dengan protokol eksekusi, manajemen siklus SaaS, dan alur kerja berbasis AI. Dari SOP hingga Pengiriman, otomatis.",
         "openProjects": "Buka Dashboard",
         "viewProtocols": "Cek Template",
         "features": {
-            "title": "Operasional Modern",
-            "subtitle": "Semua alat yang dibutuhkan tim untuk bekerja lebih cepat dan terstandar.",
+            "title": "Tingkatkan Alur Kerja Anda",
+            "subtitle": "Semua yang Anda butuhkan untuk menyelesaikan proyek lebih cepat, di satu tempat.",
             "standardized": {
-                "title": "SOP Terintegrasi",
-                "desc": "Setiap tahap kerja sudah memiliki checklist yang harus dipenuhi sebelum lanjut."
+                "title": "SOP dalam Bentuk Kode",
+                "desc": "Ubah dokumen statis menjadi protokol yang dapat dieksekusi. Pastikan setiap tugas dilakukan sesuai standar Anda."
             },
             "dependencies": {
-                "title": "Alur Terkunci",
-                "desc": "Mencegah langkah kerja dimulai sebelum prasyarat selesai dilakukan."
+                "title": "Pembatas Cerdas",
+                "desc": "Alur kerja berurutan dengan tugas yang terbuka otomatis. Cegah kesalahan dengan memastikan syarat selalu terpenuhi."
             },
             "parallel": {
-                "title": "Transparansi Real-time",
-                "desc": "Semua anggota tim tahu persis status pengerjaan tanpa perlu koordinasi manual."
+                "title": "Pusat Komando Visual",
+                "desc": "Pantau progres setiap proyek secara real-time. Identifikasi hambatan sebelum berdampak pada pengiriman."
             },
             "automated": {
-                "title": "Otomatisasi Status",
-                "desc": "Status proyek merambat otomatis sesuai penyelesaian tugas di lapangan."
+                "title": "Generasi Berbasis AI",
+                "desc": "Buat protokol kompleks dalam hitungan detik menggunakan AI. Biarkan sistem menyarankan alur terbaik."
             },
             "sync": {
-                "title": "Sinkronisasi Data",
-                "desc": "Informasi terbaru langsung terupdate di seluruh divisi tanpa duplikasi data."
+                "title": "Hub SaaS & Lisensi",
+                "desc": "Kelola produk SaaS, webhook eksternal, dan siklus hidup lisensi dalam satu dashboard terpadu."
             },
             "audit": {
-                "title": "Jejak Audit Lengkap",
-                "desc": "Riwayat setiap aksi tercatat permanen untuk akuntabilitas dan evaluasi."
+                "title": "Siap untuk Developer",
+                "desc": "Dokumentasi yang dapat diekspor, integrasi webhook, dan portabilitas protokol dengan ekspor/impor JSON."
             }
+        },
+        "deployment": {
+            "title": "Opsi Deployment Fleksibel",
+            "subtitle": "Pilih model yang sesuai dengan keamanan dan kebijakan organisasi Anda.",
+            "community": {
+                "title": "Edisi Open Source",
+                "desc": "Berbasis komunitas dan gratis digunakan. Jalankan di server sendiri dan berkontribusi dalam ekosistem.",
+                "cta": "Cek di GitHub"
+            },
+            "saas": {
+                "title": "Managed SaaS",
+                "desc": "Mulai instan tanpa pusing infrastruktur. Kami menangani pembaruan, backup, dan keamanan.",
+                "cta": "Mulai Sekarang"
+            },
+            "enterprise": {
+                "title": "Jasa Setup",
+                "desc": "Butuh di VPS atau Cloud privat perusahaan sendiri? Tim kami menyediakan jasa instalasi dan konfigurasi profesional.",
+                "cta": "Hubungi Kami"
+            }
+        },
+        "story": {
+            "title": "Mengapa Kami Membangun Time Work?",
+            "content": "Banyak perusahaan mengeluh kepada Crediblemark bahwa perangkat lunak yang mereka gunakan tidak benar-benar cocok dengan iklim dan realitas perusahaan mereka. Setiap budaya perusahaan itu unik, dan solusi kaku seringkali justru menghambat. Namun, satu hal yang pasti: setiap lini tugas harus selesai dengan efisien. Itulah mengapa kami mengutamakan fleksibilitas protokol yang bisa disesuaikan dengan cara kerja unik tim Anda."
         },
         "howItWorks": {
             "title": "Cara Kerja",
@@ -209,8 +232,8 @@
             "title": "Pertanyaan Umum",
             "items": {
                 "free": {
-                    "q": "Siapa yang bisa akses?",
-                    "a": "Sistem ini dapat diakses oleh organisasi yang membutuhkan standarisasi operasional."
+                    "q": "Apakah ini open source?",
+                    "a": "Ya, Time Work bersifat open source (MIT). Anda bisa menjalankannya gratis di server sendiri, atau gunakan SaaS kami untuk kemudahan total."
                 },
                 "team": {
                     "q": "Bagaimana jika ada kesalahan?",

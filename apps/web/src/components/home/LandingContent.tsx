@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
-import { ArrowRight, Layout, Lock, CheckSquare, CheckCircle2, Menu, X, ChevronDown } from 'lucide-react';
+import { ArrowRight, Layout, Lock, CheckSquare, CheckCircle2, Menu, X, ChevronDown, Sparkles, Shield, Globe, Terminal, Cpu, Zap, Server, Activity } from 'lucide-react';
 import Link from "next/link";
 import React, { useState } from 'react';
 import { Dictionary } from '@/i18n/dictionaries';
@@ -242,32 +242,32 @@ export function LandingContent({ dict, currentUser, locale }: LandingContentProp
                     >
                         {/* Uniform Cards */}
                         <FeatureCard
-                            icon={<Layout className="w-6 h-6 text-[#052e62]" />}
+                            icon={<CheckSquare className="w-6 h-6 text-[#4f46e5]" />}
                             title={dict.home.features.standardized.title}
                             desc={dict.home.features.standardized.desc}
                         />
                         <FeatureCard
-                            icon={<Lock className="w-6 h-6 text-[#052e62]" />}
+                            icon={<Shield className="w-6 h-6 text-[#4f46e5]" />}
                             title={dict.home.features.dependencies.title}
                             desc={dict.home.features.dependencies.desc}
                         />
                         <FeatureCard
-                            icon={<CheckSquare className="w-6 h-6 text-[#052e62]" />}
+                            icon={<Layout className="w-6 h-6 text-[#4f46e5]" />}
                             title={dict.home.features.parallel.title}
                             desc={dict.home.features.parallel.desc}
                         />
                         <FeatureCard
-                            icon={<CheckCircle2 className="w-6 h-6 text-[#052e62]" />}
+                            icon={<Sparkles className="w-6 h-6 text-[#4f46e5]" />}
                             title={dict.home.features.automated.title}
                             desc={dict.home.features.automated.desc}
                         />
                         <FeatureCard
-                            icon={<ArrowRight className="w-6 h-6 text-[#052e62]" />}
+                            icon={<Globe className="w-6 h-6 text-[#4f46e5]" />}
                             title={dict.home.features.sync.title}
                             desc={dict.home.features.sync.desc}
                         />
                         <FeatureCard
-                            icon={<Menu className="w-6 h-6 text-[#052e62]" />}
+                            icon={<Terminal className="w-6 h-6 text-[#4f46e5]" />}
                             title={dict.home.features.audit.title}
                             desc={dict.home.features.audit.desc}
                         />
@@ -320,6 +320,52 @@ export function LandingContent({ dict, currentUser, locale }: LandingContentProp
                         desc={dict.home.howItWorks.steps.automate.desc}
                     />
                 </motion.div>
+            </section>
+
+            {/* Story Section */}
+            <StorySection dict={dict} />
+
+            {/* Deployment Options Section */}
+            <section id="deployment" className="py-24 bg-slate-50 border-b border-slate-100">
+                <div className="max-w-7xl mx-auto px-4">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                        className="text-center mb-16"
+                    >
+                        <h2 className="text-3xl font-bold tracking-tight text-slate-900 mb-4">{dict.home.deployment.title}</h2>
+                        <p className="text-slate-500 max-w-2xl mx-auto leading-relaxed">{dict.home.deployment.subtitle}</p>
+                    </motion.div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <DeploymentCard
+                            icon={<Globe className="w-6 h-6 text-blue-600" />}
+                            title={dict.home.deployment.community.title}
+                            desc={dict.home.deployment.community.desc}
+                            badge="Free"
+                            href="https://github.com/rasyiqi-code/timework-saas"
+                            buttonText={dict.home.deployment.community.cta}
+                        />
+                        <DeploymentCard
+                            icon={<Activity className="w-6 h-6 text-indigo-600" />}
+                            title={dict.home.deployment.saas.title}
+                            desc={dict.home.deployment.saas.desc}
+                            badge="Managed"
+                            href="/handler/sign-in"
+                            buttonText={dict.home.deployment.saas.cta}
+                        />
+                        <DeploymentCard
+                            icon={<Server className="w-6 h-6 text-slate-600" />}
+                            title={dict.home.deployment.enterprise.title}
+                            desc={dict.home.deployment.enterprise.desc}
+                            badge="Setup Service"
+                            href="https://crediblemark.com/id"
+                            buttonText={dict.home.deployment.enterprise.cta}
+                        />
+                    </div>
+                </div>
             </section>
 
             {/* FAQ Section */}
@@ -376,11 +422,11 @@ export function LandingContent({ dict, currentUser, locale }: LandingContentProp
                             transition={{ duration: 0.5 }}
                         >
                             <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 leading-tight">
-                                Save 6-7 hours<br />every single week.
+                                Focus on growth.<br />Leave the ops to us.
                             </h2>
 
                             <p className="text-lg text-indigo-100 max-w-xl mx-auto mb-10 font-medium">
-                                Join 10,000+ teams who have switched from chaotic operations to structured protocols.
+                                Join forward-thinking teams using automated protocols to scale their operations without the chaos.
                             </p>
 
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -499,5 +545,55 @@ function FaqItem({ question, answer, isOpen, onClick }: { question: string, answ
                 )}
             </AnimatePresence>
         </motion.div>
+    )
+}
+function DeploymentCard({ icon, title, desc, badge, href, buttonText }: { icon: React.ReactNode, title: string, desc: string, badge?: string, href?: string, buttonText?: string }) {
+    return (
+        <motion.div variants={itemVariants} className="relative p-8 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col">
+            {badge && (
+                <div className="absolute top-4 right-4 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-500 border border-slate-200">
+                    {badge}
+                </div>
+            )}
+            <div className="mb-6 p-3 rounded-xl bg-slate-50 w-fit">
+                {icon}
+            </div>
+            <h3 className="text-xl font-bold mb-3 text-slate-900">{title}</h3>
+            <p className="text-slate-600 leading-relaxed text-sm mb-8 flex-grow">{desc}</p>
+            {href && buttonText && (
+                <Link
+                    href={href}
+                    className="w-full py-2.5 text-center text-sm font-bold bg-white border border-slate-200 rounded-lg hover:bg-slate-50 hover:border-slate-300 transition-all text-slate-700"
+                >
+                    {buttonText}
+                </Link>
+            )}
+        </motion.div>
+    );
+}
+
+function StorySection({ dict }: { dict: Dictionary }) {
+    return (
+        <section className="py-24 bg-white">
+            <div className="max-w-4xl mx-auto px-4 text-center">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8 }}
+                >
+                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-12">
+                        {dict.home.story.title}
+                    </h2>
+                    <div className="relative p-8 md:p-12 rounded-3xl bg-blue-50/50 border border-blue-100">
+                        <div className="absolute -left-2 -top-4 text-8xl text-blue-200 font-serif opacity-30 select-none">“</div>
+                        <p className="text-xl md:text-2xl text-slate-700 leading-relaxed font-medium italic relative z-10">
+                            {dict.home.story.content}
+                        </p>
+                        <div className="absolute -right-2 -bottom-12 text-8xl text-blue-200 font-serif opacity-30 select-none">”</div>
+                    </div>
+                </motion.div>
+            </div>
+        </section>
     )
 }

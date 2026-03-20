@@ -153,39 +153,62 @@
         "openProject": "Open Project →"
     },
     "home": {
-        "badge": "v1.0 is now live",
-        "title": "Automated Operations.",
-        "titleHighlight": "Zero Coordination.",
-        "subtitle": "Time Work turns your SOPs into executable protocols. When one step finishes, the next unlocks automatically.",
+        "badge": "v1.1 with AI is now live",
+        "title": "Orchestrate Operations.",
+        "titleHighlight": "Scale with Precision.",
+        "subtitle": "Streamline your business with executable protocols, SaaS lifecycle management, and AI-driven workflows. From SOP to Delivery, automated.",
         "openProjects": "Go to Dashboard",
         "viewProtocols": "See SOPs",
         "features": {
-            "title": "Modern Operations",
+            "title": "Supercharge your workflow",
             "subtitle": "Everything you need to ship projects faster, all in one place.",
             "standardized": {
-                "title": "Impossible to Forget",
-                "desc": "Complex workflows become simple checklists. Ensure quality without micromanagement."
+                "title": "SOP as Code",
+                "desc": "Transform static documents into executable protocols. Ensure every task is performed to your exact standards."
             },
             "dependencies": {
-                "title": "Auto-Unlock",
-                "desc": "Tasks remain locked until prerequisites are met. Prevents skipping steps."
+                "title": "Smart Guardrails",
+                "desc": "Sequential workflows with auto-unlocking tasks. Prevent errors by ensuring prerequisites are always met."
             },
             "parallel": {
-                "title": "Visual Progress",
-                "desc": "See exactly where every project is stuck. Eliminate bottlenecks instantly."
+                "title": "Visual Command Center",
+                "desc": "Track every project's progress in real-time. Identify bottlenecks before they impact your delivery."
             },
             "automated": {
-                "title": "Automated Execution",
-                "desc": "Protocols run themselves. Just set the rules and watch it go."
+                "title": "AI-Powered Generation",
+                "desc": "Draft complex protocols in seconds using AI. Let the system suggest the best workflow for your needs."
             },
             "sync": {
-                "title": "Real-time Sync",
-                "desc": "Changes propagate instantly across your team."
+                "title": "SaaS & License Hub",
+                "desc": "Manage SaaS products, external webhooks, and license lifecycles in one unified dashboard."
             },
             "audit": {
-                "title": "Audit Trails",
-                "desc": "Track every action and record evidence with a click."
+                "title": "Developer Ready",
+                "desc": "Exportable documentation, webhook integrations, and protocol portability with JSON export/import."
             }
+        },
+        "deployment": {
+            "title": "Flexible Deployment",
+            "subtitle": "Choose the model that fits your organization's security and policy requirements.",
+            "community": {
+                "title": "Open Source Edition",
+                "desc": "Community-driven and free to use. Host it yourself and contribute to the evolution of automated operations.",
+                "cta": "View on GitHub"
+            },
+            "saas": {
+                "title": "Managed SaaS",
+                "desc": "Scale instantly without thinking about infrastructure. We handle updates, backups, and security.",
+                "cta": "Get Started"
+            },
+            "enterprise": {
+                "title": "Setup Service",
+                "desc": "Need it on your own VPS or Private Cloud? Our team provides professional setup and configuration services.",
+                "cta": "Request Setup"
+            }
+        },
+        "story": {
+            "title": "Why We Built Time Work?",
+            "content": "Many companies complained to Crediblemark that the software they used didn't truly fit their company's climate and reality. Every corporate culture is unique, and rigid solutions often hinder progress. However, one thing is certain: every line of task must be completed efficiently. That's why we prioritize protocol flexibility that can be tailored to your team's unique way of working."
         },
         "howItWorks": {
             "title": "How it Works",
@@ -209,8 +232,8 @@
             "title": "Frequently Asked Questions",
             "items": {
                 "free": {
-                    "q": "Is it free?",
-                    "a": "Time Work offers various plans depending on your organization size."
+                    "q": "Is it open source?",
+                    "a": "Yes, Time Work is open source (MIT). You can host it yourself for free, or use our managed SaaS for a worry-free experience."
                 },
                 "team": {
                     "q": "Can I invite my team?",

@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { updateProtocol } from '@/actions/protocol';
-import { Check, X, Pencil } from 'lucide-react';
+import { updateProtocol, exportProtocol } from '@/actions/protocol';
+import { Check, X, Pencil, Download } from 'lucide-react';
 
 interface ProtocolHeaderProps {
     protocol: {
@@ -59,6 +59,24 @@ export function ProtocolHeader({ protocol, users = [] }: ProtocolHeaderProps) {
                 ? prev.filter(id => id !== userId)
                 : [...prev, userId]
         );
+    };
+
+    const handleExport = async () => {
+        try {
+            const data = await exportProtocol(protocol.id);
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${protocol.name.replace(/\s+/g, '_')}_export.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error('Failed to export protocol', error);
+            alert('Failed to export protocol');
+        }
     };
 
     if (isEditing) {
@@ -138,6 +156,13 @@ export function ProtocolHeader({ protocol, users = [] }: ProtocolHeaderProps) {
                     title="Edit Protocol Details"
                 >
                     <Pencil className="w-4 h-4" />
+                </button>
+                <button
+                    onClick={handleExport}
+                    className="opacity-0 group-hover:opacity-100 transition-opacity p-1.5 hover:bg-slate-100 rounded text-slate-400 hover:text-indigo-600 dark:hover:bg-slate-800"
+                    title="Export Protocol to JSON"
+                >
+                    <Download className="w-4 h-4" />
                 </button>
             </h1>
             <p className="text-slate-500 text-sm mt-1 dark:text-slate-400">

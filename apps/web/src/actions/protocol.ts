@@ -588,3 +588,111 @@ export async function createProtocolFromAI(data: ProtocolGenerationData) {
   revalidatePath('/admin/protocols');
   return { success: true, protocolId };
 }
+
+export async function exportProtocol(id: string) {
+  const user = await requireAdmin();
+  const protocol = await getProtocolById(id);
+
+  if (!protocol || protocol.organizationId !== user.organizationId) {
+    throw new Error('Protocol not found or unauthorized');
+  }
+
+  // Map items to a clean export format
+  const exportItems = protocol.items.map(item => ({
+    id: item.id,
+    title: item.title,
+    description: item.description,
+    type: item.type,
+    duration: item.duration,
+    requireAttachment: item.requireAttachment,
+    fileAccess: item.fileAccess,
+    color: item.color,
+    metadata: item.metadata,
+    parentId: item.parentId,
+    dependencies: item.dependsOn.map(d => d.prerequisiteId)
+  }));
+
+  const exportData = {
+    name: protocol.name,
+    description: protocol.description,
+    formFields: protocol.formFields,
+    titleFormat: protocol.titleFormat,
+    items: exportItems
+  };
+
+  return exportData;
+}
+
+export async function importProtocol(data: any) {
+  const user = await requireAdmin();
+  if (!user.organizationId) throw new Error('No Organization selected');
+
+  // 1. Create the Protocol
+  const protocol = await prisma.protocol.create({
+    data: {
+      name: `${data.name} (Imported)`,
+      description: data.description || '',
+      organizationId: user.organizationId,
+      allowedCreators: { connect: [{ id: user.id }] },
+      formFields: data.formFields || undefined,
+      titleFormat: data.titleFormat || undefined
+    }
+  });
+
+  const protocolId = protocol.id;
+  const idMap = new Map<string, string>(); // Maps export ID to real DB UUID
+
+  // 2. Create all items first to generate their real UUIDs
+  for (let i = 0; i < data.items.length; i++) {
+    const item = data.items[i];
+    const createdItem = await prisma.protocolItem.create({
+      data: {
+        protocolId,
+        title: item.title,
+        description: item.description,
+        type: item.type,
+        duration: item.duration || 1,
+        color: item.color,
+        requireAttachment: item.requireAttachment ?? false,
+        fileAccess: item.fileAccess || 'PUBLIC',
+        metadata: item.metadata || undefined,
+        order: i,
+        role: 'STAFF', 
+      }
+    });
+    idMap.set(item.id, createdItem.id);
+  }
+
+  // 3. Establish dependencies and parent-child relationships
+  for (const item of data.items) {
+    const realId = idMap.get(item.id);
+    if (!realId) continue;
+
+    // Set parentId if it exists in the import
+    if (item.parentId && idMap.has(item.parentId)) {
+      await prisma.protocolItem.update({
+        where: { id: realId },
+        data: { parentId: idMap.get(item.parentId) }
+      });
+    }
+
+    // Create dependencies
+    if (item.dependencies && item.dependencies.length > 0) {
+      const depPromises = item.dependencies.map((depId: string) => {
+        const realDepId = idMap.get(depId);
+        if (!realDepId) return null;
+        return prisma.protocolDependency.create({
+          data: {
+            itemId: realId,
+            prerequisiteId: realDepId
+          }
+        });
+      });
+
+      await Promise.all(depPromises.filter(Boolean));
+    }
+  }
+
+  revalidatePath('/admin/protocols');
+  return { success: true, protocolId };
+}

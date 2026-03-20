@@ -9,6 +9,7 @@ export const dynamic = 'force-dynamic';
 import { getUsers } from '@/actions/user';
 
 import { AIGeneratorTrigger } from '@/components/protocol/AIGeneratorTrigger';
+import { ImportProtocolTrigger } from '@/components/protocol/ImportProtocolTrigger';
 
 export default async function ProtocolsPage() {
     await checkRole('ADMIN');
@@ -34,7 +35,10 @@ export default async function ProtocolsPage() {
                         <h2 className="text-sm font-bold text-slate-800 flex items-center gap-2 dark:text-slate-200">
                             {dict.protocolLibrary.createTitle}
                         </h2>
-                        <AIGeneratorTrigger />
+                        <div className="flex items-center gap-2">
+                            <ImportProtocolTrigger />
+                            <AIGeneratorTrigger />
+                        </div>
                     </div>
                     <ProtocolForm dict={dict.protocolLibrary} users={users} />
                 </div>

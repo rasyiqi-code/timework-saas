@@ -20,10 +20,12 @@
         "superAdmin": "Super Admin",
         "signIn": "Sign In",
         "signOut": "Sign Out",
+        "accountSettings": "Account Settings",
         "getStarted": "Get Started",
         "projectForm": "Project Form",
         "insight": "Insight",
         "fileManager": "File Manager",
+        "billing": "Subscription",
         "trash": "Trash"
     },
     "protocol": {

@@ -8,6 +8,14 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
+    const { getCurrentUser } = await import('@/actions/auth');
+    const user = await getCurrentUser();
+
+    if (user?.organization?.subscriptionStatus === 'EXPIRED') {
+        import('next/navigation').then(({ redirect }) => redirect('/billing'));
+        return null;
+    }
+
     const [data, dict] = await Promise.all([
         getInsightStats(),
         getDictionary()

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { ThemeToggle } from '../theme/ThemeToggle';
-import { UserButton } from "@stackframe/stack";
+import { UserDropdown } from './UserDropdown';
 
 import { LanguageToggle } from '../language/LanguageToggle';
 import { usePathname } from 'next/navigation';
@@ -13,7 +13,11 @@ import { CheckSquare } from 'lucide-react';
 interface NavbarUser {
     name: string | null;
     role: string;
-    organization?: { name: string } | null;
+    organization?: { 
+        name: string;
+        subscriptionStatus: string;
+        trialEndsAt: Date;
+    } | null;
 }
 
 // Navbar now expects dict and locale as props, as it's a client component
@@ -102,12 +106,7 @@ export function Navbar({ dict, locale, signInUrl, currentUser, canSeeFileManager
                     style={{ WebkitAppRegion: 'no-drag' }}
                 >
                     {currentUser ? (
-                        <div className="flex items-center gap-2">
-                            <span className="text-xs font-medium hidden md:inline-block text-slate-500 dark:text-slate-400">
-                                {currentUser.name}
-                            </span>
-                            <UserButton />
-                        </div>
+                        <UserDropdown dict={dict} />
                     ) : (
                         <Link
                             href={signInUrl}

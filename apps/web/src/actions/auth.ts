@@ -49,17 +49,36 @@ const getCurrentUserImpl = async () => {
     try {
         // 3. Sync Organization if needed (Must be first for FK integrity)
         if (selectedTeam) {
-            await prisma.organization.upsert({
+            const org = await prisma.organization.upsert({
                 where: { id: selectedTeam.id },
                 create: {
                     id: selectedTeam.id,
                     name: selectedTeam.displayName || 'Organization',
-                    slug: ('slug' in selectedTeam ? (selectedTeam as { slug?: string }).slug : undefined) || undefined
+                    slug: ('slug' in selectedTeam ? (selectedTeam as { slug?: string }).slug : undefined) || undefined,
+                    trialEndsAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days trial
+                    subscriptionStatus: 'TRIAL'
                 },
                 update: {
                     name: selectedTeam.displayName || 'Organization'
                 }
             });
+
+            // If trial ended and not active, verify with Crediblemark
+            if (org.subscriptionStatus === 'TRIAL' && org.trialEndsAt < new Date()) {
+                const { checkSubscription } = await import('@/lib/crediblemark');
+                const isActive = await checkSubscription(email);
+                if (isActive) {
+                    await prisma.organization.update({
+                        where: { id: org.id },
+                        data: { subscriptionStatus: 'ACTIVE' }
+                    });
+                } else {
+                    await prisma.organization.update({
+                        where: { id: org.id },
+                        data: { subscriptionStatus: 'EXPIRED' }
+                    });
+                }
+            }
         }
 
         // 4. Atomic User Sync

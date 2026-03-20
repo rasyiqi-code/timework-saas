@@ -3,6 +3,7 @@ import { getProtocols } from '@/actions/protocol';
 import { CreateProjectModal } from '@/components/project/CreateProjectModal';
 import { ProjectTable } from '@/components/project/ProjectTable';
 import { getDictionary } from '@/i18n/server';
+import { redirect } from 'next/navigation';
 
 
 
@@ -16,6 +17,11 @@ export default async function ProjectsPage() {
     // Fetch user for organization ID (Realtime)
     const { getCurrentUser } = await import('@/actions/auth');
     const user = await getCurrentUser();
+
+    // Subscription Guard
+    if (user?.organization?.subscriptionStatus === 'EXPIRED') {
+        redirect('/billing');
+    }
 
     // Filter protocols for creation modal (only allowed ones)
     const creatableProtocols = allProtocols.filter(p => {

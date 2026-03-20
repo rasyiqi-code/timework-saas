@@ -30,6 +30,16 @@ model Organization {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  // Subscription Details (Crediblemark)
+  subscriptionStatus   String   @default("TRIAL") // TRIAL, ACTIVE, PAST_DUE, CANCELED, EXPIRED
+  subscriptionId       String?
+  planName            String?
+  subscriptionPrice    Float?
+  subscriptionCurrency String?
+  subscriptionInterval String?
+  trialEndsAt         DateTime @default(now())   // Initialized during user sync
+  subscriptionEndsAt   DateTime?
+
   members     OrganizationMember[]
   activeUsers User[]              // Users who currently have this Org selected
   projects    Project[]

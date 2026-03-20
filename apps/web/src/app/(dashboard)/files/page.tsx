@@ -7,6 +7,14 @@ export const metadata = {
 };
 
 export default async function FileManagerPage() {
+    const { getCurrentUser } = await import('@/actions/auth');
+    const user = await getCurrentUser();
+
+    if (user?.organization?.subscriptionStatus === 'EXPIRED') {
+        const { redirect } = await import('next/navigation');
+        redirect('/billing');
+    }
+
     const projects = await getAllFilesGroupedByProject();
 
     return (
